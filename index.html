@@ -340,18 +340,46 @@
                 commercialName: "Lime (CaO), Limestone (CaCO3), Gypsum (CaSO4·2H2O)",
                 extraction: "Extracted from minerals like limestone, gypsum, and fluorite. Pure calcium metal is produced by the electrolysis of molten calcium chloride."
             },
-            { number: 21, symbol: "Sc", name: "Scandium", group: 3, period: 4, type: "Transition Metal" },
-            { number: 22, symbol: "Ti", name: "Titanium", group: 4, period: 4, type: "Transition Metal" },
-            { number: 23, symbol: "V", name: "Vanadium", group: 5, period: 4, type: "Transition Metal" },
-            { number: 24, symbol: "Cr", name: "Chromium", group: 6, period: 4, type: "Transition Metal" },
-            { number: 25, symbol: "Mn", name: "Manganese", group: 7, period: 4, type: "Transition Metal" },
+            { number: 21, symbol: "Sc", name: "Scandium", group: 3, period: 4, type: "Transition Metal",
+                usage: "Lightweight alloys (aerospace, sporting goods), high-intensity discharge lamps, solid-state lasers.",
+                commercialName: "Scandium",
+                extraction: "Obtained as a byproduct from the processing of uranium ores or rare earth elements. Separation is complex, often involving solvent extraction or ion exchange."
+            },
+            { number: 22, symbol: "Ti", name: "Titanium", group: 4, period: 4, type: "Transition Metal",
+                usage: "Aerospace (aircraft, rockets), medical implants, sporting goods, architectural applications (lightweight and corrosion-resistant).",
+                commercialName: "Titanium, Rutile, Ilmenite (minerals)",
+                extraction: "Mined primarily from rutile and ilmenite minerals. The Kroll process is the main method: TiO2 is converted to TiCl4, which is then reduced with magnesium in an inert atmosphere."
+            },
+            { number: 23, symbol: "V", name: "Vanadium", group: 5, period: 4, type: "Transition Metal",
+                usage: "High-strength low-alloy steel, catalysts (sulfuric acid production), rechargeable batteries (vanadium redox flow batteries).",
+                commercialName: "Vanadium",
+                extraction: "Obtained from vanadium-bearing titanomagnetite ores or as a byproduct of uranium mining. Processes involve roasting the ore with salt, leaching, and then reduction with calcium or aluminum."
+            },
+            { number: 24, symbol: "Cr", name: "Chromium", group: 6, period: 4, type: "Transition Metal",
+                usage: "Stainless steel (corrosion resistance), chrome plating, pigments, catalysts, refractories.",
+                commercialName: "Chromium, Chromite (mineral)",
+                extraction: "Mined primarily from chromite ore. Ferrochromium (an alloy) is produced by reducing chromite with carbon in an electric arc furnace. Pure chromium is made by further processing of ferrochromium."
+            },
+            { number: 25, symbol: "Mn", name: "Manganese", group: 7, period: 4, type: "Transition Metal",
+                usage: "Steel production (removes oxygen, adds hardness), aluminum alloys, batteries, fertilizers.",
+                commercialName: "Manganese, Pyrolusite (mineral)",
+                extraction: "Mined from manganese oxide ores (e.g., pyrolusite). High-purity manganese is produced by electrolysis of manganese sulfate solutions, or by aluminothermic reduction of manganese oxides."
+            },
             { number: 26, symbol: "Fe", name: "Iron", group: 8, period: 4, type: "Transition Metal",
                 usage: "Steel production (construction, automotive, machinery), cast iron products.",
                 commercialName: "Iron Ore (hematite, magnetite)",
                 extraction: "Mined as iron ore (oxides like hematite and magnetite). Extracted by reduction with coke in a blast furnace, producing pig iron, which is then refined into steel."
             },
-            { number: 27, symbol: "Co", name: "Cobalt", group: 9, period: 4, type: "Transition Metal" },
-            { number: 28, symbol: "Ni", name: "Nickel", group: 10, period: 4, type: "Transition Metal" },
+            { number: 27, symbol: "Co", name: "Cobalt", group: 9, period: 4, type: "Transition Metal",
+                usage: "Lithium-ion batteries, superalloys (jet engines), magnetic alloys, pigments (cobalt blue).",
+                commercialName: "Cobalt",
+                extraction: "Obtained as a byproduct of copper and nickel mining. Extraction involves complex hydrometallurgical processes to separate cobalt from other metals."
+            },
+            { number: 28, symbol: "Ni", name: "Nickel", group: 10, period: 4, type: "Transition Metal",
+                usage: "Stainless steel, alloys (inconel, monel), coinage, rechargeable batteries (NiMH, NiCd), catalysts.",
+                commercialName: "Nickel",
+                extraction: "Mined from sulfide ores (pentlandite) and laterite ores. Sulfide ores are concentrated and then smelted. Laterite ores are processed by pyrometallurgical (reduction with carbon) or hydrometallurgical (leaching) methods."
+            },
             { number: 29, symbol: "Cu", name: "Copper", group: 11, period: 4, type: "Transition Metal",
                 usage: "Electrical wiring, plumbing, roofing, coins, alloys (brass, bronze).",
                 commercialName: "Copper",
@@ -362,115 +390,455 @@
                 commercialName: "Zinc, Zinc Blende (mineral)",
                 extraction: "Mined from zinc sulfide ores (zinc blende). The ore is roasted to form zinc oxide, which is then reduced with carbon (pyrometallurgy) or dissolved in sulfuric acid and electrolyzed (hydrometallurgy)."
             },
-            { number: 31, symbol: "Ga", name: "Gallium", group: 13, period: 4, type: "Post-transition Metal" },
-            { number: 32, symbol: "Ge", name: "Germanium", group: 14, period: 4, type: "Metalloid" },
-            { number: 33, symbol: "As", name: "Arsenic", group: 15, period: 4, type: "Metalloid" },
-            { number: 34, symbol: "Se", name: "Selenium", group: 16, period: 4, type: "Nonmetal" },
-            { number: 35, symbol: "Br", name: "Bromine", group: 17, period: 4, type: "Halogen" },
-            { number: 36, symbol: "Kr", name: "Krypton", group: 18, period: 4, type: "Noble Gas" },
+            { number: 31, symbol: "Ga", name: "Gallium", group: 13, period: 4, type: "Post-transition Metal",
+                usage: "LEDs (gallium nitride), semiconductors (gallium arsenide), solar panels, high-temperature thermometers.",
+                commercialName: "Gallium",
+                extraction: "Obtained as a byproduct during the production of aluminum (from bauxite) or zinc. Recovered from the Bayer liquor during alumina refining or from zinc residues."
+            },
+            { number: 32, symbol: "Ge", name: "Germanium", group: 14, period: 4, type: "Metalloid",
+                usage: "Fiber optics, infrared optics, semiconductors (early transistors), catalysts.",
+                commercialName: "Germanium",
+                extraction: "Typically obtained as a byproduct of zinc ore processing or from fly ash of coal-fired power plants. Recovered through fractional distillation of germanium tetrachloride."
+            },
+            { number: 33, symbol: "As", name: "Arsenic", group: 15, period: 4, type: "Metalloid",
+                usage: "Wood preservatives, insecticides (historically), semiconductors (gallium arsenide), glass decolorizer.",
+                commercialName: "Arsenic, Orpiment, Realgar (minerals)",
+                extraction: "Obtained as a byproduct of the smelting of copper, lead, and gold ores. It can be separated by volatilization as arsenic trioxide."
+            },
+            { number: 34, symbol: "Se", name: "Selenium", group: 16, period: 4, type: "Nonmetal",
+                usage: "Glass manufacturing (decolorizer, red color), photocells, solar cells, rectifiers, dietary supplement.",
+                commercialName: "Selenium",
+                extraction: "Primarily obtained as a byproduct from the anode slimes during electrolytic refining of copper. Also recovered from lead and nickel refining."
+            },
+            { number: 35, symbol: "Br", name: "Bromine", group: 17, period: 4, type: "Halogen",
+                usage: "Flame retardants, drilling fluids, pesticides (historically), photographic chemicals, pharmaceuticals.",
+                commercialName: "Bromine",
+                extraction: "Extracted from brines (salt lakes, oil wells), and seawater. Bromide ions are oxidized to bromine using chlorine gas, followed by steam stripping or air blowing."
+            },
+            { number: 36, symbol: "Kr", name: "Krypton", group: 18, period: 4, type: "Noble Gas",
+                usage: "Fluorescent lamps, some types of light bulbs, lasers (excimer lasers), medical imaging (MRI).",
+                commercialName: "Krypton",
+                extraction: "Obtained by fractional distillation of liquid air, present in very small quantities as a byproduct of oxygen and nitrogen production."
+            },
             // Row 5
-            { number: 37, symbol: "Rb", name: "Rubidium", group: 1, period: 5, type: "Alkali Metal" },
-            { number: 38, symbol: "Sr", name: "Strontium", group: 2, period: 5, type: "Alkaline Earth Metal" },
-            { number: 39, symbol: "Y", name: "Yttrium", group: 3, period: 5, type: "Transition Metal" },
-            { number: 40, symbol: "Zr", name: "Zirconium", group: 4, period: 5, type: "Transition Metal" },
-            { number: 41, symbol: "Nb", name: "Niobium", group: 5, period: 5, type: "Transition Metal" },
-            { number: 42, symbol: "Mo", name: "Molybdenum", group: 6, period: 5, type: "Transition Metal" },
-            { number: 43, symbol: "Tc", name: "Technetium", group: 7, period: 5, type: "Transition Metal" },
-            { number: 44, symbol: "Ru", name: "Ruthenium", group: 8, period: 5, type: "Transition Metal" },
-            { number: 45, symbol: "Rh", name: "Rhodium", group: 9, period: 5, type: "Transition Metal" },
-            { number: 46, symbol: "Pd", name: "Palladium", group: 10, period: 5, type: "Transition Metal" },
+            { number: 37, symbol: "Rb", name: "Rubidium", group: 1, period: 5, type: "Alkali Metal",
+                usage: "Atomic clocks, specialized glasses, photoemissive cells, biomedical research.",
+                commercialName: "Rubidium",
+                extraction: "Obtained as a byproduct from the mining of lithium and cesium minerals (e.g., lepidolite, pollucite). Separation is often done by fractional crystallization or ion exchange."
+            },
+            { number: 38, symbol: "Sr", name: "Strontium", group: 2, period: 5, type: "Alkaline Earth Metal",
+                usage: "Fireworks (red color), specialized glass for cathode ray tubes (historically), pyrotechnics, medical imaging (bone scans).",
+                commercialName: "Strontium, Celestine, Strontianite (minerals)",
+                extraction: "Mined from celestine (strontium sulfate) and strontianite (strontium carbonate) minerals. Processed to strontium carbonate or chloride, then reduced with aluminum or electrolyzed."
+            },
+            { number: 39, symbol: "Y", name: "Yttrium", group: 3, period: 5, type: "Transition Metal",
+                usage: "Red phosphors in color TVs (historically), superconductors, lasers (YAG lasers), high-temperature alloys.",
+                commercialName: "Yttrium",
+                extraction: "Mined from rare earth minerals like xenotime and monazite. Extracted through solvent extraction or ion exchange, followed by reduction of yttrium fluoride with calcium."
+            },
+            { number: 40, symbol: "Zr", name: "Zirconium", group: 4, period: 5, type: "Transition Metal",
+                usage: "Nuclear reactors (fuel cladding), ceramics, refractories, surgical instruments (corrosion resistance).",
+                commercialName: "Zirconium, Zircon (mineral)",
+                extraction: "Mined from zircon mineral. The Kroll process (similar to titanium) is used: Zirconium dioxide is converted to ZrCl4, which is then reduced with magnesium."
+            },
+            { number: 41, symbol: "Nb", name: "Niobium", group: 5, period: 5, type: "Transition Metal",
+                usage: "High-strength low-alloy steel, superconducting magnets (MRI, NMR), superalloys (jet engines), welding electrodes.",
+                commercialName: "Niobium, Columbite-Tantalite (mineral)",
+                extraction: "Mined from pyrochlore and columbite minerals. Extracted through chemical processing to separate it from tantalum, followed by reduction of niobium compounds."
+            },
+            { number: 42, symbol: "Mo", name: "Molybdenum", group: 6, period: 5, type: "Transition Metal",
+                usage: "High-strength steel alloys, catalysts (petroleum refining), lubricants (MoS2), high-temperature applications.",
+                commercialName: "Molybdenum, Molybdenite (mineral)",
+                extraction: "Mined primarily from molybdenite (MoS2) ore. The ore is concentrated by flotation, roasted to MoO3, and then reduced with hydrogen or aluminum."
+            },
+            { number: 43, symbol: "Tc", name: "Technetium", group: 7, period: 5, type: "Transition Metal",
+                usage: "Medical diagnostics (Tc-99m in imaging), corrosion inhibitor (research), nuclear power (fission product).",
+                commercialName: "Technetium",
+                extraction: "Almost exclusively produced artificially as a byproduct of nuclear fission (uranium, plutonium). Extracted from nuclear reactor waste or enriched uranium fission products."
+            },
+            { number: 44, symbol: "Ru", name: "Ruthenium", group: 8, period: 5, type: "Transition Metal",
+                usage: "Electrical contacts, hardeners for platinum and palladium alloys, catalysts, solar cells (dye-sensitized).",
+                commercialName: "Ruthenium",
+                extraction: "Obtained as a byproduct of nickel, copper, and platinum group metal refining. Separated by complex chemical processes, often involving distillation of volatile ruthenium tetroxide."
+            },
+            { number: 45, symbol: "Rh", name: "Rhodium", group: 9, period: 5, type: "Transition Metal",
+                usage: "Catalytic converters (automotive), jewelry plating, electrical contacts, high-temperature resistance.",
+                commercialName: "Rhodium",
+                extraction: "Obtained as a byproduct of platinum and nickel refining. Separated from other platinum group metals through various chemical precipitation and solvent extraction methods."
+            },
+            { number: 46, symbol: "Pd", name: "Palladium", group: 10, period: 5, type: "Transition Metal",
+                usage: "Catalytic converters, jewelry, dental fillings, electrical contacts, hydrogen purification.",
+                commercialName: "Palladium",
+                extraction: "Obtained as a byproduct of nickel, copper, and platinum mining. Separated from other platinum group metals through chemical precipitation and ion exchange."
+            },
             { number: 47, symbol: "Ag", name: "Silver", group: 11, period: 5, type: "Transition Metal",
                 usage: "Jewelry, coinage, silverware, photography, electrical contacts, solar panels.",
                 commercialName: "Silver",
                 extraction: "Obtained as a byproduct of copper, lead, and zinc refining. Can also be extracted from silver ores directly through cyanidation or smelting."
             },
-            { number: 48, symbol: "Cd", name: "Cadmium", group: 12, period: 5, type: "Transition Metal" },
-            { number: 49, symbol: "In", name: "Indium", group: 13, period: 5, type: "Post-transition Metal" },
+            { number: 48, symbol: "Cd", name: "Cadmium", group: 12, period: 5, type: "Transition Metal",
+                usage: "Batteries (NiCd, now less common), pigments, electroplating, nuclear reactor control rods.",
+                commercialName: "Cadmium",
+                extraction: "Obtained as a byproduct of zinc, lead, and copper refining. Recovered from zinc smelting flue dusts by distillation or electrolytic refining."
+            },
+            { number: 49, symbol: "In", name: "Indium", group: 13, period: 5, type: "Post-transition Metal",
+                usage: "Indium tin oxide (ITO) for touchscreens and LCDs, low-melting-point alloys, semiconductors, solder.",
+                commercialName: "Indium",
+                extraction: "Obtained as a byproduct from the processing of zinc, lead, and copper ores. Recovered from flue dusts and residues by leaching and electrolysis or cementation."
+            },
             { number: 50, symbol: "Sn", name: "Tin", group: 14, period: 5, type: "Post-transition Metal",
                 usage: "Protective coating for other metals (tin plating), solder, bronze (alloy with copper).",
                 commercialName: "Tin, Cassiterite (mineral)",
                 extraction: "Mined primarily from cassiterite ore (tin dioxide). The ore is crushed, concentrated, and then roasted to remove impurities, followed by reduction in a furnace with carbon."
             },
-            { number: 51, symbol: "Sb", name: "Antimony", group: 15, period: 5, type: "Metalloid" },
-            { number: 52, symbol: "Te", name: "Tellurium", group: 16, period: 5, type: "Metalloid" },
+            { number: 51, symbol: "Sb", name: "Antimony", group: 15, period: 5, type: "Metalloid",
+                usage: "Flame retardants, lead alloys (batteries, bullets), semiconductors, pigments.",
+                commercialName: "Antimony, Stibnite (mineral)",
+                extraction: "Mined primarily from stibnite ore (antimony sulfide). Roasted to form antimony oxide, which is then reduced with carbon or iron, or processed by hydrometallurgy."
+            },
+            { number: 52, symbol: "Te", name: "Tellurium", group: 16, period: 5, type: "Metalloid",
+                usage: "Cadmium telluride solar cells, alloys (steel, copper), rubber vulcanization, thermoelectric devices.",
+                commercialName: "Tellurium",
+                extraction: "Obtained as a byproduct from the anode slimes during electrolytic refining of copper, and also from lead and gold refining."
+            },
             { number: 53, symbol: "I", name: "Iodine", group: 17, period: 5, type: "Halogen",
                 usage: "Antiseptic (tincture of iodine), medical imaging (contrast agents), nutrition (thyroid function).",
                 commercialName: "Iodine",
                 extraction: "Extracted from deep-sea brines, nitrate deposits, and seaweed. Methods include oxidation of iodide ions to elemental iodine using chlorine, or ion exchange resins."
             },
-            { number: 54, symbol: "Xe", name: "Xenon", group: 18, period: 5, type: "Noble Gas" },
+            { number: 54, symbol: "Xe", name: "Xenon", group: 18, period: 5, type: "Noble Gas",
+                usage: "High-intensity discharge lamps (headlights, projectors), excimer lasers, general anesthesia, ion propulsion systems.",
+                commercialName: "Xenon",
+                extraction: "Obtained by fractional distillation of liquid air, found in very small concentrations as a byproduct of oxygen and nitrogen production."
+            },
             // Row 6 (includes Lanthanides placeholder)
-            { number: 55, symbol: "Cs", name: "Cesium", group: 1, period: 6, type: "Alkali Metal" },
-            { number: 56, symbol: "Ba", name: "Barium", group: 2, period: 6, type: "Alkaline Earth Metal" },
-            { number: 57, symbol: "La", name: "Lanthanum", group: 3, period: 6, type: "Lanthanide" }, // Start of Lanthanides
+            { number: 55, symbol: "Cs", name: "Cesium", group: 1, period: 6, type: "Alkali Metal",
+                usage: "Atomic clocks (most accurate), drilling fluids, highly sensitive detectors, catalysts.",
+                commercialName: "Cesium",
+                extraction: "Mined from pollucite mineral. Extracted by chemical processing, often involving acid digestion and precipitation, followed by reduction with magnesium or calcium."
+            },
+            { number: 56, symbol: "Ba", name: "Barium", group: 2, period: 6, type: "Alkaline Earth Metal",
+                usage: "Drilling fluids (barite), fireworks (green color), medical imaging (barium meals), vacuum tubes (getter).",
+                commercialName: "Barium, Barite (mineral)",
+                extraction: "Mined primarily from barite (barium sulfate). Reduced with carbon to barium sulfide, then further processed to barium metal by aluminothermic reduction or electrolysis."
+            },
+            { number: 57, symbol: "La", name: "Lanthanum", group: 3, period: 6, type: "Lanthanide",
+                usage: "Camera lenses (high refractive index), flints for lighters, hydrogen storage alloys, hybrid car batteries (NiMH).",
+                commercialName: "Lanthanum",
+                extraction: "Obtained from rare earth minerals like monazite and bastnäsite. Extracted via solvent extraction or ion exchange, followed by reduction of anhydrous halides with calcium."
+            }, // Start of Lanthanides
             // Placeholder for Lanthanides (58-71)
-            { number: 72, symbol: "Hf", name: "Hafnium", group: 4, period: 6, type: "Transition Metal" },
-            { number: 73, symbol: "Ta", name: "Tantalum", group: 5, period: 6, type: "Transition Metal" },
-            { number: 74, symbol: "W", name: "Tungsten", group: 6, period: 6, type: "Transition Metal" },
-            { number: 75, symbol: "Re", name: "Rhenium", group: 7, period: 6, type: "Transition Metal" },
-            { number: 76, symbol: "Os", name: "Osmium", group: 8, period: 6, type: "Transition Metal" },
-            { number: 77, symbol: "Ir", name: "Iridium", group: 9, period: 6, type: "Transition Metal" },
-            { number: 78, symbol: "Pt", name: "Platinum", group: 10, period: 6, type: "Transition Metal" },
-            { number: 79, symbol: "Au", name: "Gold", group: 11, period: 6, type: "Transition Metal" },
-            { number: 80, symbol: "Hg", name: "Mercury", group: 12, period: 6, type: "Transition Metal" },
-            { number: 81, symbol: "Tl", name: "Thallium", group: 13, period: 6, type: "Post-transition Metal" },
-            { number: 82, symbol: "Pb", name: "Lead", group: 14, period: 6, type: "Post-transition Metal" },
-            { number: 83, symbol: "Bi", name: "Bismuth", group: 15, period: 6, type: "Post-transition Metal" },
-            { number: 84, symbol: "Po", name: "Polonium", group: 16, period: 6, type: "Metalloid" },
-            { number: 85, symbol: "At", name: "Astatine", group: 17, period: 6, type: "Halogen" },
-            { number: 86, symbol: "Rn", name: "Radon", group: 18, period: 6, type: "Noble Gas" },
+            { number: 72, symbol: "Hf", name: "Hafnium", group: 4, period: 6, type: "Transition Metal",
+                usage: "Control rods in nuclear reactors (high neutron absorption), superalloys, plasma cutting electrodes.",
+                commercialName: "Hafnium",
+                extraction: "Always found with zirconium. Separated from zirconium (due to their similar chemistry) via solvent extraction or ion exchange, then processed by the Kroll process."
+            },
+            { number: 73, symbol: "Ta", name: "Tantalum", group: 5, period: 6, type: "Transition Metal",
+                usage: "Capacitors for electronics (smartphones, computers), surgical implants, high-temperature alloys.",
+                commercialName: "Tantalum, Columbite-Tantalite (mineral)",
+                extraction: "Mined from columbite-tantalite ore. Chemical processing separates it from niobium, followed by reduction of tantalum compounds with sodium or by electrolysis."
+            },
+            { number: 74, symbol: "W", name: "Tungsten", group: 6, period: 6, type: "Transition Metal",
+                usage: "Filaments in light bulbs, X-ray targets, high-speed steel, heavy-metal alloys (military, weights).",
+                commercialName: "Tungsten, Wolfram, Wolframite, Scheelite (minerals)",
+                extraction: "Mined from wolframite and scheelite ores. Processed to tungsten oxide, which is then reduced with hydrogen or carbon to produce tungsten powder."
+            },
+            { number: 75, symbol: "Re", name: "Rhenium", group: 7, period: 6, type: "Transition Metal",
+                usage: "Superalloys for jet engines (enhances heat resistance), petroleum catalysts (unleaded gasoline).",
+                commercialName: "Rhenium",
+                extraction: "Obtained as a byproduct of molybdenum and copper refining. Recovered from flue dusts and scrubber solutions produced during the roasting of molybdenite."
+            },
+            { number: 76, symbol: "Os", name: "Osmium", group: 8, period: 6, type: "Transition Metal",
+                usage: "Hard alloys (fountain pen tips, electrical contacts), specialized instruments (pivot points), catalysts.",
+                commercialName: "Osmium",
+                extraction: "Obtained as a byproduct of nickel, copper, and platinum group metal refining. Separated by complex chemical methods, often involving distillation of osmium tetroxide."
+            },
+            { number: 77, symbol: "Ir", name: "Iridium", group: 9, period: 6, type: "Transition Metal",
+                usage: "Spark plug electrodes, crucibles for high-temperature applications, medical implants, catalysts.",
+                commercialName: "Iridium",
+                extraction: "Obtained as a byproduct of nickel, copper, and platinum group metal refining. Separated from other PGMs through chemical precipitation."
+            },
+            { number: 78, symbol: "Pt", name: "Platinum", group: 10, period: 6, type: "Transition Metal",
+                usage: "Catalytic converters, jewelry, laboratory equipment, medical devices, fuel cells.",
+                commercialName: "Platinum",
+                extraction: "Mined from various platinum group element (PGE) ores. Extracted and refined through a complex series of chemical treatments to separate it from other PGMs."
+            },
+            { number: 79, symbol: "Au", name: "Gold", group: 11, period: 6, type: "Transition Metal",
+                usage: "Jewelry, coinage, investment, electronics (connectors), dental fillings.",
+                commercialName: "Gold",
+                extraction: "Mined from gold-bearing ores. Extracted by cyanidation (dissolving gold in cyanide solution) or by gravity separation, followed by refining."
+            },
+            { number: 80, symbol: "Hg", name: "Mercury", group: 12, period: 6, type: "Transition Metal",
+                usage: "Thermometers (historically), barometers, dental amalgams (historically), fluorescent lamps, chemical catalysts.",
+                commercialName: "Mercury, Quicksilver, Cinnabar (mineral)",
+                extraction: "Mined primarily from cinnabar ore (mercury sulfide). The ore is heated in a retort, vaporizing the mercury, which is then condensed."
+            },
+            { number: 81, symbol: "Tl", name: "Thallium", group: 13, period: 6, type: "Post-transition Metal",
+                usage: "Infrared detectors, low-temperature switches, medical imaging (cardiac stress tests), fiber optics (historically, due to toxicity).",
+                commercialName: "Thallium",
+                extraction: "Obtained as a byproduct from the smelting of copper, lead, and zinc ores. Recovered from flue dusts and residues."
+            },
+            { number: 82, symbol: "Pb", name: "Lead", group: 14, period: 6, type: "Post-transition Metal",
+                usage: "Car batteries, radiation shielding, ammunition, plumbing (historically), solders (historically).",
+                commercialName: "Lead, Galena (mineral)",
+                extraction: "Mined primarily from galena (lead sulfide) ore. The ore is concentrated, roasted to lead oxide, and then reduced in a blast furnace with coke."
+            },
+            { number: 83, symbol: "Bi", name: "Bismuth", group: 15, period: 6, type: "Post-transition Metal",
+                usage: "Pharmaceuticals (Pepto-Bismol), low-melting-point alloys, cosmetics, pigments, lead-free solder.",
+                commercialName: "Bismuth",
+                extraction: "Obtained as a byproduct of lead, copper, tin, and tungsten refining. Recovered from anode slimes or by chemical precipitation."
+            },
+            { number: 84, symbol: "Po", name: "Polonium", group: 16, period: 6, type: "Metalloid",
+                usage: "Alpha particle source (static eliminators, nuclear igniters), thermoelectric power in spacecraft (research).",
+                commercialName: "Polonium",
+                extraction: "Extremely rare in nature. Primarily produced artificially by bombarding bismuth-209 with neutrons in a nuclear reactor, followed by chemical separation."
+            },
+            { number: 85, symbol: "At", name: "Astatine", group: 17, period: 6, type: "Halogen",
+                usage: "Medical research (potential for targeted alpha therapy in cancer treatment).",
+                commercialName: "Astatine",
+                extraction: "Extremely rare and highly radioactive. Produced artificially in laboratories by bombarding bismuth with alpha particles."
+            },
+            { number: 86, symbol: "Rn", name: "Radon", group: 18, period: 6, type: "Noble Gas",
+                usage: "Radioactive tracer (historically in medical research), a major indoor air pollutant (decay product of uranium).",
+                commercialName: "Radon",
+                extraction: "Naturally occurring from the radioactive decay of uranium and thorium in rocks and soil. Can be collected from the decay of radium solutions, but not produced commercially."
+            },
             // Row 7 (includes Actinides placeholder)
-            { number: 87, symbol: "Fr", name: "Francium", group: 1, period: 7, type: "Alkali Metal" },
-            { number: 88, symbol: "Ra", name: "Radium", group: 2, period: 7, type: "Alkaline Earth Metal" },
-            { number: 89, symbol: "Ac", name: "Actinium", group: 3, period: 7, type: "Actinide" }, // Start of Actinides
-            // Placeholder for Actinides (90-103)
-            { number: 104, symbol: "Rf", name: "Rutherfordium", group: 4, period: 7, type: "Transition Metal" },
-            { number: 105, symbol: "Db", name: "Dubnium", group: 5, period: 7, type: "Transition Metal" },
-            { number: 106, symbol: "Sg", name: "Seaborgium", group: 6, period: 7, type: "Transition Metal" },
-            { number: 107, symbol: "Bh", name: "Bohrium", group: 7, period: 7, type: "Transition Metal" },
-            { number: 108, symbol: "Hs", name: "Hassium", group: 8, period: 7, type: "Transition Metal" },
-            { number: 109, symbol: "Mt", name: "Meitnerium", group: 9, period: 7, type: "Transition Metal" },
-            { number: 110, symbol: "Ds", name: "Darmstadtium", group: 10, period: 7, type: "Transition Metal" },
-            { number: 111, symbol: "Rg", name: "Roentgenium", group: 11, period: 7, type: "Transition Metal" },
-            { number: 112, symbol: "Cn", name: "Copernicium", group: 12, period: 7, type: "Transition Metal" },
-            { number: 113, symbol: "Nh", name: "Nihonium", group: 13, period: 7, type: "Post-transition Metal" },
-            { number: 114, symbol: "Fl", name: "Flerovium", group: 14, period: 7, type: "Post-transition Metal" },
-            { number: 115, symbol: "Mc", name: "Moscovium", group: 15, period: 7, type: "Post-transition Metal" },
-            { number: 116, symbol: "Lv", name: "Livermorium", group: 16, period: 7, type: "Post-transition Metal" },
-            { number: 117, symbol: "Ts", name: "Tennessine", group: 17, period: 7, type: "Halogen" },
-            { number: 118, symbol: "Og", name: "Oganesson", group: 18, period: 7, type: "Noble Gas" },
+            { number: 87, symbol: "Fr", name: "Francium", group: 1, period: 7, type: "Alkali Metal",
+                usage: "Research only (highly radioactive, extremely short half-life).",
+                commercialName: "Francium",
+                extraction: "Extremely rare and radioactive. Produced artificially in laboratories by bombarding thorium with protons, or as a decay product of actinium."
+            },
+            { number: 88, symbol: "Ra", name: "Radium", group: 2, period: 7, type: "Alkaline Earth Metal",
+                usage: "Medical applications (historically in radiotherapy), luminous paints (historically).",
+                commercialName: "Radium",
+                extraction: "Obtained as a byproduct of uranium ore processing. Extremely rare and difficult to extract from uranium residues."
+            },
+            { number: 89, symbol: "Ac", name: "Actinium", group: 3, period: 7, type: "Actinide",
+                usage: "Research only (radioactive, used as a source of alpha particles).",
+                commercialName: "Actinium",
+                extraction: "Extremely rare. Produced in nuclear reactors by neutron bombardment of radium, or from uranium ores in trace amounts."
+            }, // Start of Actinides
+            // Placeholder for Actinides (90-103) - filling in some more info
+            { number: 104, symbol: "Rf", name: "Rutherfordium", group: 4, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Rutherfordium",
+                extraction: "Synthesized in particle accelerators by bombarding lighter atoms (e.g., Californium) with heavy ions (e.g., Carbon)."
+            },
+            { number: 105, symbol: "Db", name: "Dubnium", group: 5, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Dubnium",
+                extraction: "Synthesized in particle accelerators by bombarding lighter atoms (e.g., Californium) with heavy ions (e.g., Nitrogen)."
+            },
+            { number: 106, symbol: "Sg", name: "Seaborgium", group: 6, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Seaborgium",
+                extraction: "Synthesized in particle accelerators by bombarding lighter atoms (e.g., Californium) with heavy ions (e.g., Oxygen)."
+            },
+            { number: 107, symbol: "Bh", name: "Bohrium", group: 7, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Bohrium",
+                extraction: "Synthesized in particle accelerators by bombarding lighter atoms (e.g., Bismuth) with heavy ions (e.g., Chromium)."
+            },
+            { number: 108, symbol: "Hs", name: "Hassium", group: 8, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Hassium",
+                extraction: "Synthesized in particle accelerators by bombarding lead with iron ions."
+            },
+            { number: 109, symbol: "Mt", name: "Meitnerium", group: 9, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Meitnerium",
+                extraction: "Synthesized in particle accelerators by bombarding bismuth with iron ions."
+            },
+            { number: 110, symbol: "Ds", name: "Darmstadtium", group: 10, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Darmstadtium",
+                extraction: "Synthesized in particle accelerators by bombarding lead with nickel ions."
+            },
+            { number: 111, symbol: "Rg", name: "Roentgenium", group: 11, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Roentgenium",
+                extraction: "Synthesized in particle accelerators by bombarding bismuth with nickel ions."
+            },
+            { number: 112, symbol: "Cn", name: "Copernicium", group: 12, period: 7, type: "Transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Copernicium",
+                extraction: "Synthesized in particle accelerators by bombarding lead with zinc ions."
+            },
+            { number: 113, symbol: "Nh", name: "Nihonium", group: 13, period: 7, type: "Post-transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Nihonium",
+                extraction: "Synthesized in particle accelerators by bombarding bismuth with zinc ions."
+            },
+            { number: 114, symbol: "Fl", name: "Flerovium", group: 14, period: 7, type: "Post-transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Flerovium",
+                extraction: "Synthesized in particle accelerators by bombarding plutonium with calcium ions."
+            },
+            { number: 115, symbol: "Mc", name: "Moscovium", group: 15, period: 7, type: "Post-transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Moscovium",
+                extraction: "Synthesized in particle accelerators by bombarding americium with calcium ions."
+            },
+            { number: 116, symbol: "Lv", name: "Livermorium", group: 16, period: 7, type: "Post-transition Metal",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Livermorium",
+                extraction: "Synthesized in particle accelerators by bombarding curium with calcium ions."
+            },
+            { number: 117, symbol: "Ts", name: "Tennessine", group: 17, period: 7, type: "Halogen",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Tennessine",
+                extraction: "Synthesized in particle accelerators by bombarding berkelium with calcium ions."
+            },
+            { number: 118, symbol: "Og", name: "Oganesson", group: 18, period: 7, type: "Noble Gas",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Oganesson",
+                extraction: "Synthesized in particle accelerators by bombarding californium with calcium ions."
+            },
 
             // Lanthanides (f-block, 58-71) - arranged separately
-            { number: 58, symbol: "Ce", name: "Cerium", type: "Lanthanide" },
-            { number: 59, symbol: "Pr", name: "Praseodymium", type: "Lanthanide" },
-            { number: 60, symbol: "Nd", name: "Neodymium", type: "Lanthanide" },
-            { number: 61, symbol: "Pm", name: "Promethium", type: "Lanthanide" },
-            { number: 62, symbol: "Sm", name: "Samarium", type: "Lanthanide" },
-            { number: 63, symbol: "Eu", name: "Europium", type: "Lanthanide" },
-            { number: 64, symbol: "Gd", name: "Gadolinium", type: "Lanthanide" },
-            { number: 65, symbol: "Tb", name: "Terbium", type: "Lanthanide" },
-            { number: 66, symbol: "Dy", name: "Dysprosium", type: "Lanthanide" },
-            { number: 67, symbol: "Ho", name: "Holmium", type: "Lanthanide" },
-            { number: 68, symbol: "Er", name: "Erbium", type: "Lanthanide" },
-            { number: 69, symbol: "Tm", name: "Thulium", type: "Lanthanide" },
-            { number: 70, symbol: "Yb", name: "Ytterbium", type: "Lanthanide" },
-            { number: 71, symbol: "Lu", name: "Lutetium", type: "Lanthanide" },
+            { number: 58, symbol: "Ce", name: "Cerium", type: "Lanthanide",
+                usage: "Catalytic converters, polishing powder for glass, flints for lighters, self-cleaning ovens.",
+                commercialName: "Cerium",
+                extraction: "Obtained from rare earth minerals like bastnäsite and monazite. Extracted via solvent extraction or ion exchange, followed by reduction of cerium fluoride or oxide."
+            },
+            { number: 59, symbol: "Pr", name: "Praseodymium", type: "Lanthanide",
+                usage: "Magnets (neodymium magnets), yellow glass (didymium glass), carbon arc lights (historically).",
+                commercialName: "Praseodymium",
+                extraction: "Obtained from rare earth minerals. Separated from neodymium by solvent extraction, followed by reduction of the halide with calcium."
+            },
+            { number: 60, symbol: "Nd", name: "Neodymium", type: "Lanthanide",
+                usage: "Powerful permanent magnets (NdFeB), lasers, colored glass (purple, red), electric motors.",
+                commercialName: "Neodymium",
+                extraction: "Obtained from rare earth minerals. Separated from other rare earths by solvent extraction or ion exchange, followed by reduction of neodymium fluoride with calcium."
+            },
+            { number: 61, symbol: "Pm", name: "Promethium", type: "Lanthanide",
+                usage: "Research only (radioactive, used in atomic batteries, luminous paints).",
+                commercialName: "Promethium",
+                extraction: "Produced as a byproduct of uranium fission in nuclear reactors. Extracted from spent nuclear fuel through complex chemical separation."
+            },
+            { number: 62, symbol: "Sm", name: "Samarium", type: "Lanthanide",
+                usage: "Samarium-cobalt magnets (high-temperature applications), nuclear reactor control rods, carbon arc lighting.",
+                commercialName: "Samarium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction or ion exchange, followed by reduction of samarium oxide or halides."
+            },
+            { number: 63, symbol: "Eu", name: "Europium", type: "Lanthanide",
+                usage: "Red and blue phosphors in color TVs (historically), anti-counterfeiting in banknotes, nuclear reactor control rods (research).",
+                commercialName: "Europium",
+                extraction: "Obtained from rare earth minerals. It is relatively difficult to separate from other rare earths due to its similar chemical properties. Reduction of europium oxides or halides."
+            },
+            { number: 64, symbol: "Gd", name: "Gadolinium", type: "Lanthanide",
+                usage: "MRI contrast agents, neutron absorption in nuclear reactors, magnets (refrigeration).",
+                commercialName: "Gadolinium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction, followed by reduction of gadolinium fluoride with calcium."
+            },
+            { number: 65, symbol: "Tb", name: "Terbium", type: "Lanthanide",
+                usage: "Green phosphors in color TVs, lasers, magnetostrictive alloys (Terfenol-D), solid-state devices.",
+                commercialName: "Terbium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction or ion exchange, followed by reduction of terbium fluoride with calcium."
+            },
+            { number: 66, symbol: "Dy", name: "Dysprosium", type: "Lanthanide",
+                usage: "Neodymium magnets (improves heat resistance), data storage (CD-RW), laser materials.",
+                commercialName: "Dysprosium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction, followed by reduction of dysprosium fluoride with calcium."
+            },
+            { number: 67, symbol: "Ho", name: "Holmium", type: "Lanthanide",
+                usage: "Lasers (medical, dental), colorant for glass (yellow or red), strong magnetic fields (research).",
+                commercialName: "Holmium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction, followed by reduction of holmium fluoride with calcium."
+            },
+            { number: 68, symbol: "Er", name: "Erbium", type: "Lanthanide",
+                usage: "Fiber optic communications (signal amplification), lasers (medical, dental), pink color in glass.",
+                commercialName: "Erbium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction, followed by reduction of erbium fluoride with calcium."
+            },
+            { number: 69, symbol: "Tm", name: "Thulium", type: "Lanthanide",
+                usage: "Portable X-ray devices (radioactive source), lasers (medical, military), high-temperature ceramics.",
+                commercialName: "Thulium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction, followed by reduction of thulium fluoride with calcium."
+            },
+            { number: 70, symbol: "Yb", name: "Ytterbium", type: "Lanthanide",
+                usage: "Atomic clocks, fiber lasers, steel alloys, medical X-ray sources (radioactive isotope).",
+                commercialName: "Ytterbium",
+                extraction: "Obtained from rare earth minerals. Separated by solvent extraction, followed by reduction of ytterbium fluoride with calcium."
+            },
+            { number: 71, symbol: "Lu", name: "Lutetium", type: "Lanthanide",
+                usage: "PET scanners (lutetium oxyorthosilicate crystals), catalysts, research (longest-lived stable rare earth).",
+                commercialName: "Lutetium",
+                extraction: "Obtained from rare earth minerals. Due to its similar properties to yttrium, separation is complex, often by solvent extraction or ion exchange, followed by reduction."
+            },
 
             // Actinides (f-block, 90-103) - arranged separately
-            { number: 90, symbol: "Th", name: "Thorium", type: "Actinide" },
-            { number: 91, symbol: "Pa", name: "Protactinium", type: "Actinide" },
-            { number: 92, symbol: "U", name: "Uranium", type: "Actinide" },
-            { number: 93, symbol: "Np", name: "Neptunium", type: "Actinide" },
-            { number: 94, symbol: "Pu", name: "Plutonium", type: "Actinide" },
-            { number: 95, symbol: "Am", name: "Americium", type: "Actinide" },
-            { number: 96, symbol: "Cm", name: "Curium", type: "Actinide" },
-            { number: 97, symbol: "Bk", name: "Berkelium", type: "Actinide" },
-            { number: 98, symbol: "Cf", name: "Californium", type: "Actinide" },
-            { number: 99, symbol: "Es", name: "Einsteinium", type: "Actinide" },
-            { number: 100, symbol: "Fm", name: "Fermium", type: "Actinide" },
-            { number: 101, symbol: "Md", name: "Mendelevium", type: "Actinide" },
-            { number: 102, symbol: "No", name: "Nobelium", type: "Actinide" },
-            { number: 103, symbol: "Lr", name: "Lawrencium", type: "Actinide" }
+            { number: 90, symbol: "Th", name: "Thorium", type: "Actinide",
+                usage: "Nuclear fuel (potential alternative to uranium), gas lantern mantles (historically), welding electrodes.",
+                commercialName: "Thorium, Monazite (mineral)",
+                extraction: "Mined from monazite and thorite minerals. Processed through acid digestion or alkali leaching, followed by solvent extraction or ion exchange."
+            },
+            { number: 91, symbol: "Pa", name: "Protactinium", type: "Actinide",
+                usage: "Research only (highly radioactive, used in nuclear forensics).",
+                commercialName: "Protactinium",
+                extraction: "Extremely rare. Obtained as a byproduct from uranium ore processing, but only in minute quantities due to its scarcity and radioactivity."
+            },
+            { number: 92, symbol: "U", name: "Uranium", type: "Actinide",
+                usage: "Nuclear fuel (power generation, weapons), depleted uranium for armor, counterweights in aircraft.",
+                commercialName: "Uranium, Uraninite, Carnotite (minerals)",
+                extraction: "Mined from uranium-bearing ores (e.g., uraninite, carnotite). Extracted by acid or alkali leaching, followed by solvent extraction and purification to uranium oxide (yellowcake), then enrichment for nuclear fuel."
+            },
+            { number: 93, symbol: "Np", name: "Neptunium", type: "Actinide",
+                usage: "Research only (transuranic element, produced in nuclear reactors).",
+                commercialName: "Neptunium",
+                extraction: "Produced as a byproduct in nuclear reactors from neutron capture by uranium. Extracted from spent nuclear fuel through reprocessing."
+            },
+            { number: 94, symbol: "Pu", name: "Plutonium", type: "Actinide",
+                usage: "Nuclear fuel (power, weapons), thermoelectric generators (spacecraft).",
+                commercialName: "Plutonium",
+                extraction: "Primarily produced artificially in nuclear reactors from uranium-238. Extracted from spent nuclear fuel through reprocessing."
+            },
+            { number: 95, symbol: "Am", name: "Americium", type: "Actinide",
+                usage: "Smoke detectors (Am-241 as alpha source), research (transuranic element).",
+                commercialName: "Americium",
+                extraction: "Produced artificially in nuclear reactors by neutron bombardment of plutonium. Extracted from nuclear waste."
+            },
+            { number: 96, symbol: "Cm", name: "Curium", type: "Actinide",
+                usage: "Research only (radioactive heat source, alpha particle source).",
+                commercialName: "Curium",
+                extraction: "Produced artificially in nuclear reactors by neutron bombardment of americium or plutonium. Extracted from nuclear waste."
+            },
+            { number: 97, symbol: "Bk", name: "Berkelium", type: "Actinide",
+                usage: "Research only (highly radioactive, used to synthesize new elements).",
+                commercialName: "Berkelium",
+                extraction: "Produced artificially in nuclear reactors by neutron bombardment of curium. Extremely small quantities are produced."
+            },
+            { number: 98, symbol: "Cf", name: "Californium", type: "Actinide",
+                usage: "Neutron source (cancer therapy, oil well logging, nuclear reactor startup), research.",
+                commercialName: "Californium",
+                extraction: "Produced artificially in high-flux nuclear reactors by neutron bombardment of curium. Extremely rare and expensive."
+            },
+            { number: 99, symbol: "Es", name: "Einsteinium", type: "Actinide",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Einsteinium",
+                extraction: "Synthesized in very small quantities in nuclear reactors from the intense neutron bombardment of plutonium. Extremely challenging to produce and isolate."
+            },
+            { number: 100, symbol: "Fm", name: "Fermium", type: "Actinide",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Fermium",
+                extraction: "Synthesized in very small quantities in nuclear reactors during explosive nuclear tests or by bombarding plutonium with neutrons."
+            },
+            { number: 101, symbol: "Md", name: "Mendelevium", type: "Actinide",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Mendelevium",
+                extraction: "Synthesized in particle accelerators by bombarding einsteinium with alpha particles. Only microscopic amounts have been produced."
+            },
+            { number: 102, symbol: "No", name: "Nobelium", type: "Actinide",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Nobelium",
+                extraction: "Synthesized in particle accelerators by bombarding curium with carbon ions, or californium with carbon ions."
+            },
+            { number: 103, symbol: "Lr", name: "Lawrencium", type: "Actinide",
+                usage: "Research only (synthetic, highly radioactive).",
+                commercialName: "Lawrencium",
+                extraction: "Synthesized in particle accelerators by bombarding californium or berkelium with boron or oxygen ions."
+            }
         ];
 
         // Group elements by their type for easier styling or categorization (optional)
