@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Periodic Table</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the periodic table */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        #periodic-table-container {
+            display: grid;
+            grid-template-columns: repeat(18, minmax(30px, 1fr)); /* 18 columns */
+            gap: 4px;
+            max-width: 1200px; /* Limit overall width */
+            width: 100%; /* Make it responsive */
+            margin-bottom: 20px;
+            overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+        }
+
+        .element-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #2d3748; /* Darker background for blocks */
+            border-radius: 8px;
+            padding: 6px 2px; /* Adjusted padding */
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative; /* For tooltips or popups */
+            min-width: 40px; /* Minimum width for readability */
+            height: 55px; /* Fixed height for consistency */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .element-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .atomic-number {
+            font-size: 0.65rem; /* Smaller font for number */
+            align-self: flex-start;
+            padding-left: 4px;
+            color: #a0aec0; /* Lighter grey for numbers */
+        }
+
+        .symbol {
+            font-size: 1.2rem; /* Larger font for symbol */
+            font-weight: bold;
+            color: #edf2f7; /* Off-white for symbols */
+        }
+
+        .name {
+            font-size: 0.5rem; /* Smallest font for name */
+            text-align: center;
+            line-height: 1; /* Adjust line height */
+            color: #cbd5e0; /* Grey for names */
+        }
+
+        /* Specific positioning for Lanthanides and Actinides */
+        .lanthanide-row, .actinide-row {
+            grid-column: 4 / span 15; /* Starts at column 4, spans 15 columns */
+            display: grid;
+            grid-template-columns: repeat(15, minmax(30px, 1fr));
+            gap: 4px;
+            margin-top: 10px; /* Space between main table and f-blocks */
+        }
+
+        .placeholder-block {
+            visibility: hidden; /* Hide placeholder cells */
+        }
+
+        #element-details-panel {
+            background-color: #2d3748;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            position: fixed; /* Fixed position */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%) scale(0.8); /* Start smaller */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+            border: 1px solid #4a5568;
+            overflow-y: auto; /* Allow scrolling for content */
+            max-height: 80vh; /* Max height to prevent overflow */
+        }
+
+        #element-details-panel.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-button {
+            background-color: #e53e3e; /* Red for close button */
+            color: white;
+            border: none;
+            border-radius: 9999px; /* Fully rounded */
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1; /* Adjust line height for better centering */
+        }
+
+        .close-button:hover {
+            background-color: #c53030;
+        }
+
+        .detail-heading {
+            font-weight: bold;
+            color: #a0aec0; /* Lighter grey for headings */
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .detail-text {
+            color: #edf2f7; /* Off-white for detail text */
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            #periodic-table-container {
+                grid-template-columns: repeat(18, minmax(25px, 1fr)); /* Smaller columns for mobile */
+                gap: 2px;
+            }
+            .element-block {
+                padding: 4px 1px;
+                min-width: 35px;
+                height: 50px;
+            }
+            .atomic-number {
+                font-size: 0.6rem;
+            }
+            .symbol {
+                font-size: 1rem;
+            }
+            .name {
+                font-size: 0.45rem;
+            }
+            .lanthanide-row, .actinide-row {
+                grid-template-columns: repeat(15, minmax(25px, 1fr));
+            }
+            #element-details-panel {
+                width: 95%; /* Wider panel on mobile */
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-3xl font-bold mb-8 text-white">Interactive Periodic Table</h1>
+
+    <div id="periodic-table-container">
+        <!-- Elements will be dynamically inserted here by JavaScript -->
+    </div>
+
+    <!-- Lanthanides and Actinides will be inserted here -->
+    <div id="lanthanide-actinide-container" class="w-full max-w-screen-lg flex justify-center mt-4">
+        <div class="lanthanide-row"></div>
+        <div class="actinide-row"></div>
+    </div>
+
+
+    <div id="overlay"></div>
+
+    <div id="element-details-panel" class="hidden">
+        <button id="close-details-button" class="close-button">&times;</button>
+        <h2 id="detail-symbol" class="text-4xl font-bold text-center mb-2"></h2>
+        <h3 id="detail-name" class="text-2xl text-center text-gray-400 mb-4"></h3>
+        <p id="detail-atomic-number" class="text-lg text-center text-gray-500 mb-4"></p>
+
+        <div class="detail-section">
+            <h4 class="detail-heading">Usage:</h4>
+            <p id="detail-usage" class="detail-text"></p>
+        </div>
+
+        <div class="detail-section">
+            <h4 class="detail-heading">Commercial Name(s):</h4>
+            <p id="detail-commercial-name" class="detail-text"></p>
+        </div>
+
+        <div class="detail-section">
+            <h4 class="detail-heading">Extraction:</h4>
+            <p id="detail-extraction" class="detail-text"></p>
+        </div>
+    </div>
+
+    <script>
+        // Array of periodic table elements with detailed information
+        // Only a few elements have detailed usage, commercial name, and extraction info for brevity.
+        // You can expand this data as needed.
+        const elementsData = [
+            // Row 1
+            { number: 1, symbol: "H", name: "Hydrogen", group: 1, period: 1, type: "Nonmetal",
+                usage: "Fuel for rockets, production of ammonia, used in welding and cutting metals.",
+                commercialName: "Hydrogen",
+                extraction: "Primarily produced by steam reforming of natural gas. Also by electrolysis of water."
+            },
+            { number: 2, symbol: "He", name: "Helium", group: 18, period: 1, type: "Noble Gas",
+                usage: "Used in balloons and airships, cryogenics (cooling superconductive magnets), arc welding, and as a component in breathing mixtures for deep-sea divers.",
+                commercialName: "Helium",
+                extraction: "Extracted from natural gas deposits through fractional distillation. Natural gas contains small percentages of helium."
+            },
+            // Row 2
+            { number: 3, symbol: "Li", name: "Lithium", group: 1, period: 2, type: "Alkali Metal",
+                usage: "Lithium-ion batteries (smartphones, EVs), alloys with aluminum (aircraft), psychiatric medication.",
+                commercialName: "Lithium",
+                extraction: "Extracted from brines (salt lakes) and hard-rock minerals (spodumene, petalite). Brine extraction involves pumping the brine to the surface, evaporating water, and then precipitating lithium carbonate. Mineral extraction involves crushing and roasting the ore, followed by acid leaching."
+            },
+            { number: 4, symbol: "Be", name: "Beryllium", group: 2, period: 2, type: "Alkaline Earth Metal",
+                usage: "Alloys (copper-beryllium for springs, electrical contacts), X-ray windows, nuclear reactors.",
+                commercialName: "Beryllium",
+                extraction: "Mined from beryl and bertrandite minerals. Extracted through complex chemical processes, often involving fluoride or sulfate methods, to produce beryllium hydroxide, which is then converted to pure beryllium metal."
+            },
+            { number: 5, symbol: "B", name: "Boron", group: 13, period: 2, type: "Metalloid",
+                usage: "Borosilicate glass (Pyrex), detergents, agriculture (fertilizers), semiconductors.",
+                commercialName: "Borax (Sodium Borate), Boric Acid",
+                extraction: "Mined from borax deposits (e.g., in Turkey, USA). Borax is dissolved in water, purified, and recrystallized. Boron metal is produced by reducing boron oxides with magnesium or aluminum."
+            },
+            { number: 6, symbol: "C", name: "Carbon", group: 14, period: 2, type: "Nonmetal",
+                usage: "Essential for all organic life, fuels (coal, oil, gas), diamonds (jewelry, cutting tools), graphite (pencils, lubricants, electrodes).",
+                commercialName: "Carbon (various forms like coal, graphite, diamond)",
+                extraction: "Occurs naturally as diamond and graphite. Coal, oil, and natural gas are fossilized carbon compounds. Industrial carbon is often produced from the destructive distillation of coal or petroleum."
+            },
+            { number: 7, symbol: "N", name: "Nitrogen", group: 15, period: 2, type: "Nonmetal",
+                usage: "Main component of air (78%), fertilizers (ammonia, nitrates), refrigerants, inert atmosphere for food packaging.",
+                commercialName: "Nitrogen (liquid or gaseous)",
+                extraction: "Obtained commercially by fractional distillation of liquid air. Air is cooled and compressed until it liquefies, then nitrogen, oxygen, and argon are separated based on their boiling points."
+            },
+            { number: 8, symbol: "O", name: "Oxygen", group: 16, period: 2, type: "Nonmetal",
+                usage: "Essential for respiration in living organisms, combustion, steelmaking, medical applications.",
+                commercialName: "Oxygen (liquid or gaseous)",
+                extraction: "Produced industrially by fractional distillation of liquid air (similar to nitrogen extraction). Also produced by electrolysis of water, but this is less common for large-scale production."
+            },
+            { number: 9, symbol: "F", name: "Fluorine", group: 17, period: 2, type: "Halogen",
+                usage: "Toothpaste (fluoride), refrigerants (CFCs, now being phased out), uranium enrichment, teflon production.",
+                commercialName: "Fluorine, Fluorspar (mineral)",
+                extraction: "Extracted from fluorite (fluorspar) mineral (CaF2). Pure fluorine gas is produced by the electrolysis of a mixture of potassium fluoride and anhydrous hydrofluoric acid."
+            },
+            { number: 10, symbol: "Ne", name: "Neon", group: 18, period: 2, type: "Noble Gas",
+                usage: "Neon signs (glows red-orange), gas lasers, high-voltage indicators.",
+                commercialName: "Neon",
+                extraction: "Obtained by fractional distillation of liquid air, a byproduct of liquid oxygen production. Air contains trace amounts of neon."
+            },
+            // Row 3
+            { number: 11, symbol: "Na", name: "Sodium", group: 1, period: 3, type: "Alkali Metal",
+                usage: "Table salt (NaCl), street lights (sodium vapor lamps), cooling agent in nuclear reactors, desiccant.",
+                commercialName: "Sodium, Caustic Soda (NaOH), Baking Soda (NaHCO3)",
+                extraction: "Pure sodium metal is produced industrially by the electrolysis of molten sodium chloride (Downs process)."
+            },
+            { number: 12, symbol: "Mg", name: "Magnesium", group: 2, period: 3, type: "Alkaline Earth Metal",
+                usage: "Lightweight alloys (aircraft, car parts), flash photography, fireworks, antacids (milk of magnesia).",
+                commercialName: "Magnesium",
+                extraction: "Extracted from seawater, brines, and minerals like magnesite and dolomite. From seawater, magnesium chloride is precipitated, then electrolyzed to yield magnesium metal (Dow process)."
+            },
+            { number: 13, symbol: "Al", name: "Aluminum", group: 13, period: 3, type: "Post-transition Metal",
+                usage: "Aircraft, automotive, packaging (cans), construction, electrical transmission lines.",
+                commercialName: "Aluminum",
+                extraction: "Produced commercially from bauxite ore. The bauxite is refined to alumina (aluminum oxide) using the Bayer process, and then alumina is electrolyzed in molten cryolite using the Hall-Héroult process to produce pure aluminum metal."
+            },
+            { number: 14, symbol: "Si", name: "Silicon", group: 14, period: 3, type: "Metalloid",
+                usage: "Semiconductors (computer chips), solar cells, glass, ceramics, silicone polymers (sealants, lubricants).",
+                commercialName: "Silicon",
+                extraction: "Produced by heating sand (silicon dioxide, SiO2) with carbon in an electric arc furnace. High-purity silicon for electronics requires further refining through processes like the Siemens process or float-zone method."
+            },
+            { number: 15, symbol: "P", name: "Phosphorus", group: 15, period: 3, type: "Nonmetal",
+                usage: "Fertilizers, detergents, matches, fireworks, some types of steel.",
+                commercialName: "Phosphorus (Red/White)",
+                extraction: "Obtained primarily from phosphate rock. The rock is heated in an electric furnace with carbon and silica to produce elemental phosphorus vapor, which is then condensed."
+            },
+            { number: 16, symbol: "S", name: "Sulfur", group: 16, period: 3, type: "Nonmetal",
+                usage: "Sulfuric acid (most produced chemical worldwide), fertilizers, gunpowder, vulcanization of rubber.",
+                commercialName: "Sulfur, Brimstone",
+                extraction: "Mainly obtained from hydrogen sulfide (H2S) in natural gas and petroleum through the Claus process. Also extracted from native sulfur deposits using the Frasch process (pumping hot water and air into the deposit)."
+            },
+            { number: 17, symbol: "Cl", name: "Chlorine", group: 17, period: 3, type: "Halogen",
+                usage: "Disinfectant (water purification), PVC plastic production, bleach, solvents, pesticides.",
+                commercialName: "Chlorine",
+                extraction: "Produced industrially by the electrolysis of aqueous sodium chloride (brine) using the chlor-alkali process, yielding chlorine gas, sodium hydroxide, and hydrogen gas."
+            },
+            { number: 18, symbol: "Ar", name: "Argon", group: 18, period: 3, type: "Noble Gas",
+                usage: "Inert atmosphere for welding, light bulbs (filament protection), preserving ancient documents, double-pane windows.",
+                commercialName: "Argon",
+                extraction: "Obtained commercially by fractional distillation of liquid air, as a byproduct of oxygen and nitrogen production. Air contains about 0.93% argon."
+            },
+            // Row 4
+            { number: 19, symbol: "K", name: "Potassium", group: 1, period: 4, type: "Alkali Metal",
+                usage: "Fertilizers, soaps, detergents, glass production, chemical reagents.",
+                commercialName: "Potash (various forms like KCl, K2SO4)",
+                extraction: "Mined from ancient salt deposits (e.g., sylvite, carnallite). Extracted through dissolution, flotation, or electrostatic separation."
+            },
+            { number: 20, symbol: "Ca", name: "Calcium", group: 2, period: 4, type: "Alkaline Earth Metal",
+                usage: "Cement, steel production, dietary supplement for bone health, reducing agent in metallurgy.",
+                commercialName: "Lime (CaO), Limestone (CaCO3), Gypsum (CaSO4·2H2O)",
+                extraction: "Extracted from minerals like limestone, gypsum, and fluorite. Pure calcium metal is produced by the electrolysis of molten calcium chloride."
+            },
+            { number: 21, symbol: "Sc", name: "Scandium", group: 3, period: 4, type: "Transition Metal" },
+            { number: 22, symbol: "Ti", name: "Titanium", group: 4, period: 4, type: "Transition Metal" },
+            { number: 23, symbol: "V", name: "Vanadium", group: 5, period: 4, type: "Transition Metal" },
+            { number: 24, symbol: "Cr", name: "Chromium", group: 6, period: 4, type: "Transition Metal" },
+            { number: 25, symbol: "Mn", name: "Manganese", group: 7, period: 4, type: "Transition Metal" },
+            { number: 26, symbol: "Fe", name: "Iron", group: 8, period: 4, type: "Transition Metal",
+                usage: "Steel production (construction, automotive, machinery), cast iron products.",
+                commercialName: "Iron Ore (hematite, magnetite)",
+                extraction: "Mined as iron ore (oxides like hematite and magnetite). Extracted by reduction with coke in a blast furnace, producing pig iron, which is then refined into steel."
+            },
+            { number: 27, symbol: "Co", name: "Cobalt", group: 9, period: 4, type: "Transition Metal" },
+            { number: 28, symbol: "Ni", name: "Nickel", group: 10, period: 4, type: "Transition Metal" },
+            { number: 29, symbol: "Cu", name: "Copper", group: 11, period: 4, type: "Transition Metal",
+                usage: "Electrical wiring, plumbing, roofing, coins, alloys (brass, bronze).",
+                commercialName: "Copper",
+                extraction: "Mined from sulfide ores (e.g., chalcopyrite) and oxide ores. Sulfide ores undergo flotation, then smelting and refining. Oxide ores are processed by hydrometallurgy (leaching and electrowinning)."
+            },
+            { number: 30, symbol: "Zn", name: "Zinc", group: 12, period: 4, type: "Transition Metal",
+                usage: "Galvanizing steel (corrosion protection), brass production, batteries, dietary supplement.",
+                commercialName: "Zinc, Zinc Blende (mineral)",
+                extraction: "Mined from zinc sulfide ores (zinc blende). The ore is roasted to form zinc oxide, which is then reduced with carbon (pyrometallurgy) or dissolved in sulfuric acid and electrolyzed (hydrometallurgy)."
+            },
+            { number: 31, symbol: "Ga", name: "Gallium", group: 13, period: 4, type: "Post-transition Metal" },
+            { number: 32, symbol: "Ge", name: "Germanium", group: 14, period: 4, type: "Metalloid" },
+            { number: 33, symbol: "As", name: "Arsenic", group: 15, period: 4, type: "Metalloid" },
+            { number: 34, symbol: "Se", name: "Selenium", group: 16, period: 4, type: "Nonmetal" },
+            { number: 35, symbol: "Br", name: "Bromine", group: 17, period: 4, type: "Halogen" },
+            { number: 36, symbol: "Kr", name: "Krypton", group: 18, period: 4, type: "Noble Gas" },
+            // Row 5
+            { number: 37, symbol: "Rb", name: "Rubidium", group: 1, period: 5, type: "Alkali Metal" },
+            { number: 38, symbol: "Sr", name: "Strontium", group: 2, period: 5, type: "Alkaline Earth Metal" },
+            { number: 39, symbol: "Y", name: "Yttrium", group: 3, period: 5, type: "Transition Metal" },
+            { number: 40, symbol: "Zr", name: "Zirconium", group: 4, period: 5, type: "Transition Metal" },
+            { number: 41, symbol: "Nb", name: "Niobium", group: 5, period: 5, type: "Transition Metal" },
+            { number: 42, symbol: "Mo", name: "Molybdenum", group: 6, period: 5, type: "Transition Metal" },
+            { number: 43, symbol: "Tc", name: "Technetium", group: 7, period: 5, type: "Transition Metal" },
+            { number: 44, symbol: "Ru", name: "Ruthenium", group: 8, period: 5, type: "Transition Metal" },
+            { number: 45, symbol: "Rh", name: "Rhodium", group: 9, period: 5, type: "Transition Metal" },
+            { number: 46, symbol: "Pd", name: "Palladium", group: 10, period: 5, type: "Transition Metal" },
+            { number: 47, symbol: "Ag", name: "Silver", group: 11, period: 5, type: "Transition Metal",
+                usage: "Jewelry, coinage, silverware, photography, electrical contacts, solar panels.",
+                commercialName: "Silver",
+                extraction: "Obtained as a byproduct of copper, lead, and zinc refining. Can also be extracted from silver ores directly through cyanidation or smelting."
+            },
+            { number: 48, symbol: "Cd", name: "Cadmium", group: 12, period: 5, type: "Transition Metal" },
+            { number: 49, symbol: "In", name: "Indium", group: 13, period: 5, type: "Post-transition Metal" },
+            { number: 50, symbol: "Sn", name: "Tin", group: 14, period: 5, type: "Post-transition Metal",
+                usage: "Protective coating for other metals (tin plating), solder, bronze (alloy with copper).",
+                commercialName: "Tin, Cassiterite (mineral)",
+                extraction: "Mined primarily from cassiterite ore (tin dioxide). The ore is crushed, concentrated, and then roasted to remove impurities, followed by reduction in a furnace with carbon."
+            },
+            { number: 51, symbol: "Sb", name: "Antimony", group: 15, period: 5, type: "Metalloid" },
+            { number: 52, symbol: "Te", name: "Tellurium", group: 16, period: 5, type: "Metalloid" },
+            { number: 53, symbol: "I", name: "Iodine", group: 17, period: 5, type: "Halogen",
+                usage: "Antiseptic (tincture of iodine), medical imaging (contrast agents), nutrition (thyroid function).",
+                commercialName: "Iodine",
+                extraction: "Extracted from deep-sea brines, nitrate deposits, and seaweed. Methods include oxidation of iodide ions to elemental iodine using chlorine, or ion exchange resins."
+            },
+            { number: 54, symbol: "Xe", name: "Xenon", group: 18, period: 5, type: "Noble Gas" },
+            // Row 6 (includes Lanthanides placeholder)
+            { number: 55, symbol: "Cs", name: "Cesium", group: 1, period: 6, type: "Alkali Metal" },
+            { number: 56, symbol: "Ba", name: "Barium", group: 2, period: 6, type: "Alkaline Earth Metal" },
+            { number: 57, symbol: "La", name: "Lanthanum", group: 3, period: 6, type: "Lanthanide" }, // Start of Lanthanides
+            // Placeholder for Lanthanides (58-71)
+            { number: 72, symbol: "Hf", name: "Hafnium", group: 4, period: 6, type: "Transition Metal" },
+            { number: 73, symbol: "Ta", name: "Tantalum", group: 5, period: 6, type: "Transition Metal" },
+            { number: 74, symbol: "W", name: "Tungsten", group: 6, period: 6, type: "Transition Metal" },
+            { number: 75, symbol: "Re", name: "Rhenium", group: 7, period: 6, type: "Transition Metal" },
+            { number: 76, symbol: "Os", name: "Osmium", group: 8, period: 6, type: "Transition Metal" },
+            { number: 77, symbol: "Ir", name: "Iridium", group: 9, period: 6, type: "Transition Metal" },
+            { number: 78, symbol: "Pt", name: "Platinum", group: 10, period: 6, type: "Transition Metal" },
+            { number: 79, symbol: "Au", name: "Gold", group: 11, period: 6, type: "Transition Metal" },
+            { number: 80, symbol: "Hg", name: "Mercury", group: 12, period: 6, type: "Transition Metal" },
+            { number: 81, symbol: "Tl", name: "Thallium", group: 13, period: 6, type: "Post-transition Metal" },
+            { number: 82, symbol: "Pb", name: "Lead", group: 14, period: 6, type: "Post-transition Metal" },
+            { number: 83, symbol: "Bi", name: "Bismuth", group: 15, period: 6, type: "Post-transition Metal" },
+            { number: 84, symbol: "Po", name: "Polonium", group: 16, period: 6, type: "Metalloid" },
+            { number: 85, symbol: "At", name: "Astatine", group: 17, period: 6, type: "Halogen" },
+            { number: 86, symbol: "Rn", name: "Radon", group: 18, period: 6, type: "Noble Gas" },
+            // Row 7 (includes Actinides placeholder)
+            { number: 87, symbol: "Fr", name: "Francium", group: 1, period: 7, type: "Alkali Metal" },
+            { number: 88, symbol: "Ra", name: "Radium", group: 2, period: 7, type: "Alkaline Earth Metal" },
+            { number: 89, symbol: "Ac", name: "Actinium", group: 3, period: 7, type: "Actinide" }, // Start of Actinides
+            // Placeholder for Actinides (90-103)
+            { number: 104, symbol: "Rf", name: "Rutherfordium", group: 4, period: 7, type: "Transition Metal" },
+            { number: 105, symbol: "Db", name: "Dubnium", group: 5, period: 7, type: "Transition Metal" },
+            { number: 106, symbol: "Sg", name: "Seaborgium", group: 6, period: 7, type: "Transition Metal" },
+            { number: 107, symbol: "Bh", name: "Bohrium", group: 7, period: 7, type: "Transition Metal" },
+            { number: 108, symbol: "Hs", name: "Hassium", group: 8, period: 7, type: "Transition Metal" },
+            { number: 109, symbol: "Mt", name: "Meitnerium", group: 9, period: 7, type: "Transition Metal" },
+            { number: 110, symbol: "Ds", name: "Darmstadtium", group: 10, period: 7, type: "Transition Metal" },
+            { number: 111, symbol: "Rg", name: "Roentgenium", group: 11, period: 7, type: "Transition Metal" },
+            { number: 112, symbol: "Cn", name: "Copernicium", group: 12, period: 7, type: "Transition Metal" },
+            { number: 113, symbol: "Nh", name: "Nihonium", group: 13, period: 7, type: "Post-transition Metal" },
+            { number: 114, symbol: "Fl", name: "Flerovium", group: 14, period: 7, type: "Post-transition Metal" },
+            { number: 115, symbol: "Mc", name: "Moscovium", group: 15, period: 7, type: "Post-transition Metal" },
+            { number: 116, symbol: "Lv", name: "Livermorium", group: 16, period: 7, type: "Post-transition Metal" },
+            { number: 117, symbol: "Ts", name: "Tennessine", group: 17, period: 7, type: "Halogen" },
+            { number: 118, symbol: "Og", name: "Oganesson", group: 18, period: 7, type: "Noble Gas" },
+
+            // Lanthanides (f-block, 58-71) - arranged separately
+            { number: 58, symbol: "Ce", name: "Cerium", type: "Lanthanide" },
+            { number: 59, symbol: "Pr", name: "Praseodymium", type: "Lanthanide" },
+            { number: 60, symbol: "Nd", name: "Neodymium", type: "Lanthanide" },
+            { number: 61, symbol: "Pm", name: "Promethium", type: "Lanthanide" },
+            { number: 62, symbol: "Sm", name: "Samarium", type: "Lanthanide" },
+            { number: 63, symbol: "Eu", name: "Europium", type: "Lanthanide" },
+            { number: 64, symbol: "Gd", name: "Gadolinium", type: "Lanthanide" },
+            { number: 65, symbol: "Tb", name: "Terbium", type: "Lanthanide" },
+            { number: 66, symbol: "Dy", name: "Dysprosium", type: "Lanthanide" },
+            { number: 67, symbol: "Ho", name: "Holmium", type: "Lanthanide" },
+            { number: 68, symbol: "Er", name: "Erbium", type: "Lanthanide" },
+            { number: 69, symbol: "Tm", name: "Thulium", type: "Lanthanide" },
+            { number: 70, symbol: "Yb", name: "Ytterbium", type: "Lanthanide" },
+            { number: 71, symbol: "Lu", name: "Lutetium", type: "Lanthanide" },
+
+            // Actinides (f-block, 90-103) - arranged separately
+            { number: 90, symbol: "Th", name: "Thorium", type: "Actinide" },
+            { number: 91, symbol: "Pa", name: "Protactinium", type: "Actinide" },
+            { number: 92, symbol: "U", name: "Uranium", type: "Actinide" },
+            { number: 93, symbol: "Np", name: "Neptunium", type: "Actinide" },
+            { number: 94, symbol: "Pu", name: "Plutonium", type: "Actinide" },
+            { number: 95, symbol: "Am", name: "Americium", type: "Actinide" },
+            { number: 96, symbol: "Cm", name: "Curium", type: "Actinide" },
+            { number: 97, symbol: "Bk", name: "Berkelium", type: "Actinide" },
+            { number: 98, symbol: "Cf", name: "Californium", type: "Actinide" },
+            { number: 99, symbol: "Es", name: "Einsteinium", type: "Actinide" },
+            { number: 100, symbol: "Fm", name: "Fermium", type: "Actinide" },
+            { number: 101, symbol: "Md", name: "Mendelevium", type: "Actinide" },
+            { number: 102, symbol: "No", name: "Nobelium", type: "Actinide" },
+            { number: 103, symbol: "Lr", name: "Lawrencium", type: "Actinide" }
+        ];
+
+        // Group elements by their type for easier styling or categorization (optional)
+        const typeColors = {
+            "Alkali Metal": "bg-red-600 hover:bg-red-700",
+            "Alkaline Earth Metal": "bg-orange-600 hover:bg-orange-700",
+            "Transition Metal": "bg-yellow-600 hover:bg-yellow-700",
+            "Post-transition Metal": "bg-green-600 hover:bg-green-700",
+            "Metalloid": "bg-teal-600 hover:bg-teal-700",
+            "Nonmetal": "bg-blue-600 hover:bg-blue-700",
+            "Halogen": "bg-indigo-600 hover:bg-indigo-700",
+            "Noble Gas": "bg-purple-600 hover:bg-purple-700",
+            "Lanthanide": "bg-pink-600 hover:bg-pink-700",
+            "Actinide": "bg-emerald-600 hover:bg-emerald-700",
+            "Unknown": "bg-gray-600 hover:bg-gray-700" // For elements without a specific type
+        };
+
+
+        const periodicTableContainer = document.getElementById('periodic-table-container');
+        const lanthanideRowContainer = document.querySelector('.lanthanide-row');
+        const actinideRowContainer = document.querySelector('.actinide-row');
+        const detailsPanel = document.getElementById('element-details-panel');
+        const overlay = document.getElementById('overlay');
+        const closeButton = document.getElementById('close-details-button');
+
+        // Function to create an element block
+        function createElementBlock(element) {
+            const block = document.createElement('div');
+            block.className = `element-block ${typeColors[element.type] || typeColors["Unknown"]}`;
+            block.setAttribute('data-atomic-number', element.number);
+
+            const atomicNumber = document.createElement('div');
+            atomicNumber.className = 'atomic-number';
+            atomicNumber.textContent = element.number;
+
+            const symbol = document.createElement('div');
+            symbol.className = 'symbol';
+            symbol.textContent = element.symbol;
+
+            const name = document.createElement('div');
+            name.className = 'name';
+            name.textContent = element.name;
+
+            block.appendChild(atomicNumber);
+            block.appendChild(symbol);
+            block.appendChild(name);
+
+            block.addEventListener('click', () => showElementDetails(element));
+            return block;
+        }
+
+        // Function to populate the periodic table
+        function populatePeriodicTable() {
+            // Create a 2D array to represent the table layout for easier positioning
+            const tableGrid = Array(7).fill(null).map(() => Array(18).fill(null));
+
+            elementsData.forEach(element => {
+                if (element.period && element.group) {
+                    // Adjust 0-based indexing for arrays
+                    tableGrid[element.period - 1][element.group - 1] = element;
+                }
+            });
+
+            for (let i = 0; i < 7; i++) { // Period (row)
+                for (let j = 0; j < 18; j++) { // Group (column)
+                    const element = tableGrid[i][j];
+                    if (element) {
+                        // Special handling for Lanthanides and Actinides placeholders in the main table
+                        if (element.number === 57) { // Lanthanum, followed by the f-block elements
+                            periodicTableContainer.appendChild(createElementBlock(element));
+                            // Add a placeholder block for elements 58-71 to keep grid structure
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'placeholder-block';
+                            periodicTableContainer.appendChild(placeholder);
+                            j++; // Skip one column as we added a placeholder
+                        } else if (element.number === 89) { // Actinium, followed by the f-block elements
+                            periodicTableContainer.appendChild(createElementBlock(element));
+                            // Add a placeholder block for elements 90-103
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'placeholder-block';
+                            periodicTableContainer.appendChild(placeholder);
+                            j++; // Skip one column
+                        } else {
+                            periodicTableContainer.appendChild(createElementBlock(element));
+                        }
+                    } else {
+                        // Create empty/placeholder cells for gaps in the table
+                        const emptyBlock = document.createElement('div');
+                        emptyBlock.className = 'element-block bg-transparent shadow-none cursor-default';
+                        // Add specific classes for empty spaces in the middle of transition metals
+                        if ((i === 3 || i === 4) && (j >= 2 && j <= 11)) {
+                             emptyBlock.style.visibility = 'hidden'; // Hide the gaps in transition metals
+                        }
+                         periodicTableContainer.appendChild(emptyBlock);
+                    }
+                }
+            }
+
+            // Populate Lanthanide and Actinide rows separately below the main table
+            const lanthanides = elementsData.filter(e => e.type === "Lanthanide" && e.number >= 58 && e.number <= 71);
+            lanthanides.sort((a, b) => a.number - b.number);
+            lanthanides.forEach(element => {
+                lanthanideRowContainer.appendChild(createElementBlock(element));
+            });
+
+            const actinides = elementsData.filter(e => e.type === "Actinide" && e.number >= 90 && e.number <= 103);
+            actinides.sort((a, b) => a.number - b.number);
+            actinides.forEach(element => {
+                actinideRowContainer.appendChild(createElementBlock(element));
+            });
+        }
+
+        // Function to show element details
+        function showElementDetails(element) {
+            document.getElementById('detail-symbol').textContent = element.symbol;
+            document.getElementById('detail-name').textContent = element.name;
+            document.getElementById('detail-atomic-number').textContent = `Atomic Number: ${element.number}`;
+            document.getElementById('detail-usage').textContent = element.usage || "Information not available.";
+            document.getElementById('detail-commercial-name').textContent = element.commercialName || "Information not available.";
+            document.getElementById('detail-extraction').textContent = element.extraction || "Information not available.";
+
+            detailsPanel.classList.add('show');
+            overlay.classList.add('show');
+            detailsPanel.classList.remove('hidden'); // Ensure it's not display: none
+        }
+
+        // Function to hide element details
+        function hideElementDetails() {
+            detailsPanel.classList.remove('show');
+            overlay.classList.remove('show');
+            // Use a timeout to hide the panel after the transition completes
+            setTimeout(() => {
+                detailsPanel.classList.add('hidden');
+            }, 300); // Must match transition duration
+        }
+
+        // Event listeners for closing the details panel
+        closeButton.addEventListener('click', hideElementDetails);
+        overlay.addEventListener('click', hideElementDetails); // Close when clicking outside
+
+        // Initialize the periodic table when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', populatePeriodicTable);
+    </script>
+</body>
+</html>
